@@ -98,4 +98,4 @@
 上传成功后在网页上输出经过处理后的和自己上传的那张一模一样的图片，在当前目录下查看这张图片: homework.sctf.xctf.org.cn/homework.php?homework=./1305771078.gif
 网页上出现一堆怪异的字符，然后留的后门就有用啦  
 推荐firefox下一个非常好用的插件hackbar  
-![](file:D:\CTF\SCTF\2016\1\1.png)
+[图片](img/1.png)
