@@ -103,14 +103,14 @@
 ![图片1](img/1.png)  
 ![图片2](img/2.png)  
 ![图片3](img/3.png)  
-<br>
+  
 ###收获总结  
 1.  在某些情况下使用php://filter/read=convert.base64-encode/resource=方法查看php源代码  
  问：在什么情况下可以这么干呢  
  当这个某个url中有参数时，即get文件时，可以将参数值替换成php://filter/read=convert.base64-encode/resource=想要的.php,本来是要get到页面所指定的文件，但由于我们的替换和原本代码的不安全，使得有些情况下可以成功的读到php源代码*^_^* 
 2.  get到一个php中不安全的函数imagecreatefromgif()   
  相应的解决办法：取gif图片，经过createimagefromgif()后得到处理后的图片，将前图与后图对比，找到没有被替换的data，然后把这部分替换成自己需要的PHP代码：<?eval($_POST[2])?>（你想要实现的语句）  
-<br>
+  
 ###启示   
  学习和平时刷题时，注意积累PHP中容易出安全问题的函数，并记下为什么出安全问题，以及怎样解决。  
   这样，以后在做PHP相关的题型时，根据代码便可快速知道是什么地方出了问题，然后找到对策。   
