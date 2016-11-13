@@ -6,22 +6,48 @@
   Enhen, try more. Then easy to know it is about Stack Smashing.<br>
   So, at the point of transiation range from 23bytes-25bytes, the srack overflows.<br> 
   Now that we have known what it is about, the following path may be much smoother:)
-  [picture1]
+   [picture1]
+   [picture2]
   
 *  Then, I load it to IDA64. Wow, so many functions. <br>
    However, what we really care are only the Main(), Bye(), Flag(), Read().<br>
-   Let us see, Flag()[strar at 0X00000000000007f3] is so close to Bye()[strar at 0X00000000000007e0].
-   [picture2]
+   Let us see, Flag()[strat at 0X00000000000007f3] is so close to Bye()[strar at 0X00000000000007e0].
    [picture3]
+   [picture4]
    
 *  Maybe Assembly language is troublesome for many newcomers. So I convert is to ultrababy.c.<br>
    Yes, the C program is easier to understand, let's we start from it. But I will also figure the assembly out, which it is clearer in a long term.<br>
-   [picture4]
+   [picture5]
    
 #### Version C
-[picture5]
+[picture6]
 
 * Then look back Picture1, we will know the buffer is 24bytes【!!why it's not 23 bytes? I will explain later】<br>
   At once the input is over 24bytes, it will overflow to the memory of V_4, which originally stores the start address of Function Bye().<br>
   If we make the overflow accurately to the memory of V_4 and accurately the start address of Function Flag() replace the start address of Function Bye(). WE WILL　SUCCESS!
+  
+### Version Assembly
+[picture7]
+
+* Look at the above picture, enhen, I guess you will be clear aha~<br>
+
+
+<br>
+
+* So we input 24 "x"s + '\xf3'【take from the strat address of Flag() 0X00000000000007f3】,it will overflow accurately to the memory stored the start adress of Bye() and rewire it~
+[picture8]
+
+
+### Some questions
+
+1. Why the buffer is 24bytes but overflow will happen at input 24characters???
+ * Because after we input string, it will automaticlly be added '\0'(Null) at the end of the string to mark the end.
+ [picture9]
+ 
+2. Why we can use '\xf3' repalce '0X00000000000007f3'
+ * Because '0X00000000000007f3' and '0X00000000000007e0' are only different in '\xf3' and '\xe0'
+ * Besides, although after we input string, it will automaticlly be added '\0'(Null) at the end of the string to mark the end, <strong>Null</strong> be added to '\xf3', But it doesn't matter, because '0X00000000000007f3' the last bytes of '\xf3' is '\x07', Null is 0, it replace the 0 of '\x07', doesn't matter.
+ [picture10]
+ [picture11]
+
   
