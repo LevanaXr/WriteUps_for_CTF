@@ -1,7 +1,7 @@
 ## EKOPARTY CTF  PWN25 Ultrababy
 
 * Ok, frankly I admit this problem is quite easy, but there are still many new things in it. As the strat of my binary study, it fits me well.
-
+<br>
 * Firstly, it is a ELF object, so I run it in Kali. The result is like the fllowing picture.</br>
   Enhen, try more. Then easy to know it is about Stack Smashing.<br>
   So, at the point of transiation range from 23bytes-25bytes, the srack overflows.<br> 
@@ -18,16 +18,16 @@
 *  Maybe Assembly language is troublesome for many newcomers. So I convert is to ultrababy.c.<br>
    Yes, the C program is easier to understand, let's we start from it. But I will also figure the assembly out, which it is clearer in a long term.<br>
    ![picture5](img/5.png)
-   
+   <br>
 #### Version C
    ![picture6](img/6.png)
 
 * Then look back Picture1, we will know the buffer is 24bytes【!!why it's not 23 bytes? I will explain later】<br>
   At once the input is over 24bytes, it will overflow to the memory of V_4, which originally stores the start address of Function Bye().<br>
   If we make the overflow accurately to the memory of V_4 and accurately the start address of Function Flag() replace the start address of Function Bye(). WE WILL　SUCCESS!
-  
+  <br>
 #### Version Assembly
-   ![picture7](img/7.png)
+  ![picture7](img/7.png)
 
 * Look at the above picture, enhen, I guess you will be clear aha~<br>
 
