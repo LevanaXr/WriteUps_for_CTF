@@ -2,9 +2,8 @@
 
 ##### Ok, frankly I admit this problem is quite easy, but there are still many new things in it. As the strat of my binary study, it fits me well.
 <br>
-<br>
 * Firstly, it is a ELF object, so I run it in Kali. The result is like the fllowing picture.</br>
-  Enhen, try more. Then easy to know it is about Stack Smashing.<br>
+  Enhen, try more. Then easy to know it is about 【<strong>Stack Smashing</strong>】.<br>
   So, at the point of transiation range from 23bytes-25bytes, the srack overflows.<br> 
   Now that we have known what it is about, the following path may be much smoother:)
    ![picture1](img/1.png)
