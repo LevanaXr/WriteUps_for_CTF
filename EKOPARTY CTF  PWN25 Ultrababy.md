@@ -16,7 +16,7 @@
    ![picture4](img/4.png)
    <br>
 *  Maybe Assembly language is troublesome for many newcomers. So I convert is to ultrababy.c.<br>
-   Yes, the C program is easier to understand, let's we start from it. But I will also figure the assembly out, which it is clearer in a long term.<br>
+   The C program is easier to understand, let's start from it. But I will also figure the assembly out, which it is clearer in a long term.<br>
    ![picture5](img/5.png)
    <br>
    <br>
