@@ -4,7 +4,7 @@
 <br>
 * Firstly, it is a ELF object, so I run it in Kali. The result is like the fllowing picture.</br>
   Enhen, try more. Then easy to know it is about 【<strong>Stack Smashing</strong>】.<br>
-  So, at the point of transiation range from 23bytes-25bytes, the srack overflows.<br> 
+  So, at the point of transiation range from 23bytes-25bytes, the stack overflows.<br> 
   Now that we have known what it is about, the following path may be much smoother:)
    ![picture1](img/1.png)
    ![picture2](img/2.png)
@@ -70,5 +70,6 @@
      printf("%s", aha);// if meet the '\0' in memory, the print will over,but it's random. if meet, we can rewrite it instead of '\0'.
      return 0;
   }
+  
   '''
   
