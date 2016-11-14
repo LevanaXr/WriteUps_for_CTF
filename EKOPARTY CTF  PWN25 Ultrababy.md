@@ -24,8 +24,8 @@
    ![picture6](img/6.png)
 
 * Then look back Picture1, we will know the buffer is 24bytes【!!why it's not 23 bytes? I will explain later】<br>
-  At once the input is over 24bytes, it will overflow to the memory of V_4, which originally stores the start address of Function Bye().<br>
-  If we make the overflow accurately to the memory of V_4 and accurately the start address of Function Flag() replace the start address of Function Bye(). WE WILL　SUCCESS!
+  At once the input is over 24bytes, it will overflow to the memory of V6, which originally stores the start address of Function Bye().<br>
+  If we make the overflow accurately to the memory of V6 and accurately the start address of Function Flag() replace the start address of Function Bye(). WE WILL　SUCCESS!
   <br>
   <br>
 ### Version Assembly
@@ -51,5 +51,24 @@
  * Besides, although after we input string, it will automaticlly be added '\0'(Null) at the end of the string to mark the end, <strong>Null</strong> be added to '\xf3', But it doesn't matter, because '0X00000000000007f3' the last bytes of '\xf3' is '\x07', Null is 0, it replace the 0 of '\x07', doesn't matter.
  ![picture10](img/10.png)
  ![picture11](img/11.png)
+<br>
 
+### The Cause for the Vulnerability?
+
+* It's obvious.
+* This program don't check the the boundary of the buffer, so it's easy to cause <strong>Stack Smashing</strong>.
+* Give very simple code for example:
+  
+  ```
+  #include <stdio.h>
+  
+  int main()
+  {
+     char aha[5];
+     aha[0] = 'a';
+     aha[1] = 'b';
+     printf("%s", aha);// if meet the '\0' in memory, the print will over,but it's random. if meet, we can rewrite it instead of '\0'.
+     return 0;
+  }
+  '''
   
