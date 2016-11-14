@@ -57,16 +57,15 @@
 
 * It's obvious.
 * This program don't check the the boundary of the buffer, so it's easy to cause <strong>Stack Smashing</strong>.
-* Give very simple code for example:
+* Give very simple code for example【checked in Dev C++】:
   
   ```
   #include <stdio.h>
   
   int main()
   {
-     char aha[5];
+     char aha[1];
      aha[0] = 'a';
-     aha[1] = 'b';
      printf("%s", aha);// if meet the '\0' in memory, the print will over,but it's random. if meet, we can rewrite it instead of '\0'.
      return 0;
   }
