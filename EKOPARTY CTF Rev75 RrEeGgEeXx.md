@@ -24,10 +24,10 @@ if (((check_regex("^.{40}$", input) && check_regex(@"\w{3}\{.*\}", input)) && (c
 <br>
 
 * 正则表达式要求
-    1. 123
-    2. 123
-    3. 123
-    4. dsfsd
+ 1. a
+ 2. b
+ 3. c
+ 4. d
 <br>
 * 构造出答案为EKO{ooOOoo _ sup3r_r3g3x_challenge _ OOooOO}，检测一下正确性
 ![picture1](img/EKOCTF/re/re75/3.png)
