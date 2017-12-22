@@ -30,17 +30,17 @@
 >![](img/jarvisoj-pwn-level1-wp-5.png)
 
 #### 2.2 利用思路
->`call vulnerable_function()`之后栈的分布如下，执行完毕之后，跳转到`rip`所指向的指令（即call的下一句）
+>`call vulnerable_function()`之后栈的分布如下，执行完毕之后，跳转到`rip`所指向的指令（即call的下一句）<br>
 >![](img/jarvisoj-pwn-level1-wp-6.png)
 >
->所以我们只要用`callsystem()`函数的入口地址`覆盖掉rip`，执行完vulnerable\_function()后，就会跳转到callsystem（）了。
+>所以我们只要用`callsystem()`函数的入口地址`覆盖掉rip`，执行完vulnerable\_function()后，就会跳转到callsystem（）了。<br>
 >![](img/jarvisoj-pwn-level1-wp-7.png)
 
 ### 3. exploit
 基础栈溢出有一个基本问题，如何确定缓冲区的长度，一般会考虑采用下面三种方式：
 
 #### 3.1 ida中观察
->根据`bp-80h`加上rbp(8字)确定缓冲区的长度为`0x80+8`
+>根据`bp-80h`加上rbp(8字)确定缓冲区的长度为`0x80+8`<br>
 >![](img/jarvisoj-pwn-level1-wp-8.png)<br>
 >但是有些情况下ida的bp-xx在实际执行中并不准确，因此要考虑其他做法
 
@@ -51,10 +51,11 @@
 >利用gdb的插件`peda`来确定缓冲区长度
 1. 先创建一段长度比预计缓冲区长度要长的pattern，`pattern_create 200`此处创建长度为200的pattern<br>
 ![](img/jarvisoj-pwn-level1-wp-9.png)
-2. r运行程序，输入刚才创建的pattern，程序溢出后观察栈，记录下`ebp`内容`0x6c41415041416b41`
+2. r运行程序，输入刚才创建的pattern，程序溢出后观察栈，记录下`ebp`内容`0x6c41415041416b41`<br>
 ![](img/jarvisoj-pwn-level1-wp-10.png)<br>
-3. 利用`pattern offset 0x6c41415041416b41`得出缓冲区长度为`128`
+3. 利用`pattern offset 0x6c41415041416b41`得出缓冲区长度为`128`<br>
 ![](img/jarvisoj-pwn-level1-wp-11.png)<br>
+>`原理`：利用pattern确定缓冲区长度的原理是，创建一段较独特的pattern，使程序栈溢出后，再看覆盖掉ebp的那一小段pattern在原pattern中的位置，即可确定缓冲区长度
 
 ### 4. python脚本编写
 #### 4.1 构造payload
